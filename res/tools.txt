@@ -1,0 +1,5 @@
+!TOOLID,NAME,LEVEL,TOOLTYPE,IMAGE
+!Esimerkki(0,Ultimate Pickaxe,10,PICKAXE,0)
+
+
+1,Ultimate Pickaxe,5,PICKAXE,0

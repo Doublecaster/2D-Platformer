@@ -1,0 +1,9 @@
+!COLOR(ID),NAME,TOOL,LEVEL,IMG
+!Esimerkki(FFAA55,Dirt Block,PICKAXE,1,0)
+
+79553A,Dirt Block,PICKAXE,1,0
+00FF00,Grass Block,PICKAXE,1,1
+787878,Stone Block,PICKAXE,2,2
+606060,Cobble Block,PICKAXE,2,3
+5EEEE5,Diamond ore Block,PICKAXE,5,4
+675231,Wood Block,AXE,2,5
