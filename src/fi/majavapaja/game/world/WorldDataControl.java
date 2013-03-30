@@ -15,27 +15,29 @@ import fi.majavapaja.game.block.Block;
 import fi.majavapaja.game.block.BlockType;
 
 public class WorldDataControl {
+	
+	public static String path = "res/";
 
 	private WorldDataControl() {}
 
 	public static Block[][] loadWorld(int map) {
-		BufferedImage worldImg = null;
-		if (map == 1) worldImg = ImageManipulation.loadImage("res/map1.png");
-		else if (map == 2) worldImg = ImageManipulation.loadImage("res/map2.png");
+		if(map == 1) path += "map1.png";
+		
+		BufferedImage worldImg = ImageManipulation.loadImage(path);
 
-		worldImg = ImageManipulation.rotate(worldImg, -90);
+		worldImg = ImageManipulation.rotateImage(worldImg, 270);
 		worldImg = ImageManipulation.verticalflip(worldImg);
 		
 		int width = worldImg.getWidth();
 		int height = worldImg.getHeight();
 
 		int[] pixels = getPixels(worldImg, width, height);
-		Block[][] world = new Block[width][height];
+		Block[][] world = new Block[height][width];
 
 		int c = 0; // Counter
 
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
+		for (int i = 0; i < world.length; i++) {
+			for (int j = 0; j < world[i].length; j++) {
 				Block block = null;
 				int pixel = getRGB(pixels[c]);
 				if (pixel == getRGB(BlockType.DIRT)) block = new Block(BlockType.DIRT);
@@ -48,7 +50,7 @@ public class WorldDataControl {
 				c++;
 			}
 		}
-		// world = WorldGen.createWorld();
+		//world = WorldGen.createWorld();
 		return world;
 	}
 
@@ -64,19 +66,22 @@ public class WorldDataControl {
 			for (int j = 0; j < w; j++) {
 				int color = 0xFFFFFF;
 
-				if (blocks[j][i] == null) color = 0xFFFFFF;
-				else if (blocks[j][i].getID() == BlockType.DIRT) color = BlockType.DIRT;
-				else if (blocks[j][i].getID() == BlockType.GRASS) color = BlockType.GRASS;
-				else if (blocks[j][i].getID() == BlockType.STONE) color = BlockType.STONE;
-				else if (blocks[j][i].getID() == BlockType.COBBLE) color = BlockType.COBBLE;
-				else if (blocks[j][i].getID() == BlockType.DIAMONDORE) color = BlockType.DIAMONDORE;
-				else if (blocks[j][i].getID() == BlockType.WOOD) color = BlockType.WOOD;
+				if (blocks[i][j] == null) color = 0xFFFFFF;
+				else if (blocks[i][j].getID() == BlockType.DIRT) color = BlockType.DIRT;
+				else if (blocks[i][j].getID() == BlockType.GRASS) color = BlockType.GRASS;
+				else if (blocks[i][j].getID() == BlockType.STONE) color = BlockType.STONE;
+				else if (blocks[i][j].getID() == BlockType.COBBLE) color = BlockType.COBBLE;
+				else if (blocks[i][j].getID() == BlockType.DIAMONDORE) color = BlockType.DIAMONDORE;
+				else if (blocks[i][j].getID() == BlockType.WOOD) color = BlockType.WOOD;
 
 				bi.setRGB(j, i, color);
 			}
 		}
+		
+		bi = ImageManipulation.rotateImage(bi, 270);
+		bi = ImageManipulation.verticalflip(bi);
 
-		JScrollPane scroll = new JScrollPane(new JLabel(new ImageIcon(bi.getScaledInstance(w * 2, h * 2, Image.SCALE_AREA_AVERAGING))));
+		JScrollPane scroll = new JScrollPane(new JLabel(new ImageIcon(bi.getScaledInstance(h * 2, w * 2, Image.SCALE_AREA_AVERAGING))));
 		scroll.setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
 		scroll.getVerticalScrollBar().setUnitIncrement(20);
 

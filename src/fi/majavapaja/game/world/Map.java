@@ -19,19 +19,19 @@ public class Map {
 
 	public Map() {
 		blocks = WorldDataControl.loadWorld(1);
-		width = blocks[0].length;
-		height = blocks.length;
+		width = blocks.length;
+		height = blocks[0].length;
 
 	}
 
 	public Block[][] getBlockArea(Point start) {
 		Block[][] area = new Block[tilesOnWidth][tilesOnHeight];
 
-		for (int i = start.y; i < height; i++) {
-			if (i - start.y >= tilesOnHeight) break;
-			for (int j = start.x; j < width; j++) {
-				if (j - start.x>= tilesOnWidth) break;
-				area[j - start.x][i - start.y] = blocks[j][i];
+		for (int i = start.y, a = 0; i < height; i++, a++) {
+			if (a >= tilesOnHeight) break;
+			for (int j = start.x, b = 0; j < width; j++, b++) {
+				if (b >= tilesOnWidth) break;
+				area[b][a] = blocks[j][i];
 			}
 		}
 
@@ -81,7 +81,7 @@ public class Map {
 		/*
 		 * for (int i = 0; i < blocks.length; i++) { for (int j = 0; j < blocks[i].length; j++) { if (blocks[j][i] != null && blocks[j][i].getID() == new SpawnPointTile().getID()) { if (inMap(j, i + 1)) { blocks[j][i + 1] = null; return new Point(j * Block.BLOCKWIDTH, i * Block.BLOCKHEIGHT); } } } }
 		 */
-		return new Point(0, 0);
+		return new Point(0, 0 * Block.BLOCKHEIGHT);
 	}
 
 	public Block[][] getBlocks() {

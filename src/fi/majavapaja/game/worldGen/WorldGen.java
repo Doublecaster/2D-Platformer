@@ -5,7 +5,7 @@ import fi.majavapaja.game.block.*;
 public class WorldGen {
 
 	public static Block[][] createWorld() {
-		Block[][] world = new Block[1000][1000];
+		Block[][] world = new Block[500][750];
 		for (int i = 0; i < world.length; i++) {
 			for (int j = 0; j < world[i].length; j++) {
 				//world[j][i] = randomTile();
@@ -19,7 +19,7 @@ public class WorldGen {
 					}
 					else b = new Block(BlockType.STONE);
 				}
-				world[j][i] = b;
+				world[i][j] = b;
 			}
 		}
 		return world;

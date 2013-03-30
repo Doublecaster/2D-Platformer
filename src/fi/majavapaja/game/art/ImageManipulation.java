@@ -76,23 +76,29 @@ public class ImageManipulation {
 		return bi;
 	}
 
-	public static BufferedImage rotate(BufferedImage image, double angle) {
-		int w = image.getWidth();
-		int h = image.getHeight();
+	public static BufferedImage rotateImage(BufferedImage src, double degrees) {
+		double radians = Math.toRadians(degrees);
 
-		angle = Math.toRadians(angle);
-		double sin = Math.abs(Math.sin(angle));
-		double cos = Math.abs(Math.cos(angle));
+		int srcWidth = src.getWidth();
+		int srcHeight = src.getHeight();
 
-		int neww = (int) Math.floor(w * cos + h * sin);
-		int newh = (int) Math.floor(h * cos + w * sin);
+		/*
+		 * Calculate new image dimensions
+		 */
+		double sin = Math.abs(Math.sin(radians));
+		double cos = Math.abs(Math.cos(radians));
+		int newWidth = (int) Math.floor(srcWidth * cos + srcHeight * sin);
+		int newHeight = (int) Math.floor(srcHeight * cos + srcWidth * sin);
 
-		BufferedImage result = new BufferedImage(neww, newh, image.getType());
+		/*
+		 * Create new image and rotate it
+		 */
+		BufferedImage result = new BufferedImage(newWidth, newHeight, src.getType());
 		Graphics2D g = result.createGraphics();
-		g.translate((neww - w) / 2, (newh - h) / 2);
-		g.rotate(angle, w / 2, h / 2);
-		g.drawRenderedImage(image, null);
-		g.dispose();
+		g.translate((newWidth - srcWidth) / 2, (newHeight - srcHeight) / 2);
+		g.rotate(radians, srcWidth / 2, srcHeight / 2);
+		g.drawRenderedImage(src, null);
+
 		return result;
 	}
 
