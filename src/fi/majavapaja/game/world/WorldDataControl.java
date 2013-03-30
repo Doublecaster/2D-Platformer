@@ -20,12 +20,11 @@ public class WorldDataControl {
 
 	public static Block[][] loadWorld(int map) {
 		BufferedImage worldImg = null;
-		if (map == 1) worldImg = ImageManipulation.loadImage("res/rectMap.png");
+		if (map == 1) worldImg = ImageManipulation.loadImage("res/map1.png");
 		else if (map == 2) worldImg = ImageManipulation.loadImage("res/map2.png");
 
-		worldImg = ImageManipulation.rotate90DX(worldImg);
-		worldImg = ImageManipulation.rotate90DX(worldImg);
-		worldImg = ImageManipulation.rotate90DX(worldImg);
+		worldImg = ImageManipulation.rotate(worldImg, -90);
+		worldImg = ImageManipulation.verticalflip(worldImg);
 		
 		int width = worldImg.getWidth();
 		int height = worldImg.getHeight();

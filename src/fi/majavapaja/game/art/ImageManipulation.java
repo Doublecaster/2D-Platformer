@@ -76,13 +76,58 @@ public class ImageManipulation {
 		return bi;
 	}
 
-	public static BufferedImage rotate90DX(BufferedImage bi) {
-		int width = bi.getWidth();
-		int height = bi.getHeight();
-		BufferedImage biFlip = new BufferedImage(height, width, bi.getType());
-		for (int i = 0; i < width; i++)
-			for (int j = 0; j < height; j++)
-				biFlip.setRGB(height - 1 - j, width - 1 - i, bi.getRGB(i, j));
-		return biFlip;
+	public static BufferedImage rotate(BufferedImage image, double angle) {
+		int w = image.getWidth();
+		int h = image.getHeight();
+
+		angle = Math.toRadians(angle);
+		double sin = Math.abs(Math.sin(angle));
+		double cos = Math.abs(Math.cos(angle));
+
+		int neww = (int) Math.floor(w * cos + h * sin);
+		int newh = (int) Math.floor(h * cos + w * sin);
+
+		BufferedImage result = new BufferedImage(neww, newh, image.getType());
+		Graphics2D g = result.createGraphics();
+		g.translate((neww - w) / 2, (newh - h) / 2);
+		g.rotate(angle, w / 2, h / 2);
+		g.drawRenderedImage(image, null);
+		g.dispose();
+		return result;
 	}
+
+	/**
+	 * This method flips the image horizontally
+	 * 
+	 * @param img
+	 *            --> BufferedImage Object to be flipped horizontally
+	 * @return
+	 */
+	public static BufferedImage horizontalflip(BufferedImage img) {
+		int w = img.getWidth();
+		int h = img.getHeight();
+		BufferedImage dimg = new BufferedImage(w, h, img.getType());
+		Graphics2D g = dimg.createGraphics();
+		g.drawImage(img, 0, 0, w, h, w, 0, 0, h, null);
+		g.dispose();
+		return dimg;
+	}
+
+	/**
+	 * This method flips the image vertically
+	 * 
+	 * @param img
+	 *            --> BufferedImage object to be flipped
+	 * @return
+	 */
+	public static BufferedImage verticalflip(BufferedImage img) {
+		int w = img.getWidth();
+		int h = img.getHeight();
+		BufferedImage dimg = new BufferedImage(w, h, img.getColorModel().getTransparency());
+		Graphics2D g = dimg.createGraphics();
+		g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);
+		g.dispose();
+		return dimg;
+	}
+
 }

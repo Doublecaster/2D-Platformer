@@ -27,11 +27,11 @@ public class Map {
 	public Block[][] getBlockArea(Point start) {
 		Block[][] area = new Block[tilesOnWidth][tilesOnHeight];
 
-		for (int i = start.y, a = 0; i < height; i++, a++) {
-			if (a >= tilesOnHeight) break;
-			for (int j = start.x, b = 0; j < width; j++, b++) {
-				if (b >= tilesOnWidth) break;
-				area[b][a] = blocks[j][i];
+		for (int i = start.y; i < height; i++) {
+			if (i - start.y >= tilesOnHeight) break;
+			for (int j = start.x; j < width; j++) {
+				if (j - start.x>= tilesOnWidth) break;
+				area[j - start.x][i - start.y] = blocks[j][i];
 			}
 		}
 
