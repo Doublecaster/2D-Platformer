@@ -87,13 +87,7 @@ public class WorldDataControl {
 
 		int input = JOptionPane.showConfirmDialog(null, scroll, "Are you sure you want to save game?:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-		if (input == JOptionPane.YES_OPTION) {
-			try {
-				ImageIO.write(bi, "png", new File("res/map1.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		ImageManipulation.saveImage(bi, path);
 	}
 
 	private static int[] getPixels(BufferedImage mapImg, int width, int height) {

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public class ImageManipulation {
 	/**
@@ -60,6 +61,14 @@ public class ImageManipulation {
 			g.dispose();
 		}
 		return image;
+	}
+
+	public static void saveImage(BufferedImage bi, String path) {
+		try {
+			ImageIO.write(bi, "png", new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static BufferedImage setAlpha(BufferedImage bi, byte alpha) {
