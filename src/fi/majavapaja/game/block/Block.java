@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import fi.majavapaja.game.item.itemTool.ItemTool;
+import fi.majavapaja.game.world.WorldDataControl;
 
 public class Block {
 	public static final int BLOCKWIDTH = 16;
@@ -26,6 +27,11 @@ public class Block {
 		health = blockData.getLevel() * 10;
 	}
 
+	public Block(BlockData bd) {
+		blockData = bd;
+		health = blockData.getLevel() * 10;
+	}
+
 	public int getID() {
 		return blockData.getID();
 	}
@@ -36,7 +42,7 @@ public class Block {
 
 	public void hurt(ItemTool tool) {
 		if (tool.getType() == blockData.getTool() && tool.getLevel() >= blockData.getLevel()) {
-			//System.out.println("KLONK! with " + tool.getName() + " with damage over " + (tool.getLevel() * 7 - 1));
+			// System.out.println("KLONK! with " + tool.getName() + " with damage over " + (tool.getLevel() * 7 - 1));
 			health -= tool.getLevel() * 5;
 		}
 	}
@@ -58,8 +64,15 @@ public class Block {
 			}
 		}
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return blockData.getName();
+	}
+
+	public static BlockData getBlock(int ID) {
+		for (int i = 0; i < blocks.length; i++) {
+			if (WorldDataControl.getRGB(blocks[i].getID()) == ID) return blocks[i];
+		}
+		return null;
 	}
 }

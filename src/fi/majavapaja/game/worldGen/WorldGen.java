@@ -4,7 +4,7 @@ import fi.majavapaja.game.block.*;
 
 public class WorldGen {
 
-	public static Block[][] createWorld() {
+	/*public static Block[][] createWorld() {
 		Block[][] world = new Block[500][750];
 		for (int i = 0; i < world.length; i++) {
 			for (int j = 0; j < world[i].length; j++) {
@@ -35,5 +35,5 @@ public class WorldGen {
 		else if (pixel == 4) block = new Block(BlockType.DIAMONDORE);
 		else if (pixel == 5) block = new Block(BlockType.WOOD);
 		return block;
-	}
+	}*/
 }
