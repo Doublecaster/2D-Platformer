@@ -15,19 +15,19 @@ import fi.majavapaja.game.block.Block;
 import fi.majavapaja.game.block.BlockType;
 
 public class WorldDataControl {
-	
+
 	public static String path = "res/";
 
 	private WorldDataControl() {}
 
 	public static Block[][] loadWorld(int map) {
-		if(map == 1) path += "map1.png";
-		
+		if (map == 1) path += "map1.png";
+
 		BufferedImage worldImg = ImageManipulation.loadImage(path);
 
 		worldImg = ImageManipulation.rotateImage(worldImg, 270);
 		worldImg = ImageManipulation.verticalflip(worldImg);
-		
+
 		int width = worldImg.getWidth();
 		int height = worldImg.getHeight();
 
@@ -50,7 +50,7 @@ public class WorldDataControl {
 				c++;
 			}
 		}
-		//world = WorldGen.createWorld();
+		// world = WorldGen.createWorld();
 		return world;
 	}
 
@@ -77,7 +77,7 @@ public class WorldDataControl {
 				bi.setRGB(j, i, color);
 			}
 		}
-		
+
 		bi = ImageManipulation.rotateImage(bi, 270);
 		bi = ImageManipulation.verticalflip(bi);
 
@@ -87,7 +87,7 @@ public class WorldDataControl {
 
 		int input = JOptionPane.showConfirmDialog(null, scroll, "Are you sure you want to save game?:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-		ImageManipulation.saveImage(bi, path);
+		if (input == JOptionPane.YES_OPTION) ImageManipulation.saveImage(bi, path);
 	}
 
 	private static int[] getPixels(BufferedImage mapImg, int width, int height) {
