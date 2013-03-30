@@ -26,6 +26,9 @@ public class Game extends Canvas implements Runnable {
 	private InputHandler input = InputHandler.getInstance();
 	private MouseInputHandler mouseInput = MouseInputHandler.getInstance();
 
+	/**
+	 * Initiates the canvas.
+	 */
 	public Game() {
 		setIgnoreRepaint(true);
 		setPreferredSize(size);
@@ -36,6 +39,9 @@ public class Game extends Canvas implements Runnable {
 		addMouseWheelListener(mouseInput);
 	}
 
+	/**
+	 * Contains the game loop
+	 */
 	@Override
 	public void run() {
 		createBufferStrategy(2);

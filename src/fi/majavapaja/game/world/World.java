@@ -32,7 +32,7 @@ public class World {
 		player.setSpawn(map.getSpawnPoint());
 		player.reSpawn();
 
-		camera = new Camera(player.getVessel(), map.width * Block.BLOCKWIDTH, map.height * Block.BLOCKWIDTH);
+		camera = new Camera(player.getVessel(), map.getWidth() * Block.BLOCKWIDTH, map.getHeight() * Block.BLOCKWIDTH);
 
 		// for (int i = 0; i < 10; i++) entities.add(new PlayerCharacter(this));
 		calculateRenderArea();
@@ -111,7 +111,6 @@ public class World {
 			long a = System.currentTimeMillis() - start;
 			System.out.println("Cannot save yet! You can save again in: " + a + " ms!");
 		}
-
 	}
 
 	public boolean isPassable(int x, int y) {

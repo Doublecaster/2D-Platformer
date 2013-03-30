@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import fi.majavapaja.game.Game;
+import fi.majavapaja.game.art.ImageManipulation;
 import fi.majavapaja.game.block.Block;
 import fi.majavapaja.game.block.BlockType;
 
@@ -19,13 +20,13 @@ public class WorldDataControl {
 
 	public static Block[][] loadWorld(int map) {
 		BufferedImage worldImg = null;
-		try {
-			if (map == 1) worldImg = ImageIO.read(new File("res/map1.png"));
-			else if (map == 2) worldImg = ImageIO.read(new File("res/map2.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		if (map == 1) worldImg = ImageManipulation.loadImage("res/rectMap.png");
+		else if (map == 2) worldImg = ImageManipulation.loadImage("res/map2.png");
 
+		worldImg = ImageManipulation.rotate90DX(worldImg);
+		worldImg = ImageManipulation.rotate90DX(worldImg);
+		worldImg = ImageManipulation.rotate90DX(worldImg);
+		
 		int width = worldImg.getWidth();
 		int height = worldImg.getHeight();
 
@@ -44,7 +45,7 @@ public class WorldDataControl {
 				else if (pixel == getRGB(BlockType.COBBLE)) block = new Block(BlockType.COBBLE);
 				else if (pixel == getRGB(BlockType.DIAMONDORE)) block = new Block(BlockType.DIAMONDORE);
 				else if (pixel == getRGB(BlockType.WOOD)) block = new Block(BlockType.WOOD);
-				world[j][i] = block;
+				world[i][j] = block;
 				c++;
 			}
 		}

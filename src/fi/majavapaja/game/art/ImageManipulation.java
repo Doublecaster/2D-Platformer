@@ -26,16 +26,24 @@ public class ImageManipulation {
 
 	public static BufferedImage getScaledInstance(BufferedImage bi, double scaleFactor) {
 		int w = new Double(bi.getWidth() * scaleFactor).intValue();
-		int h= new Double(bi.getHeight() * scaleFactor).intValue();
-		
+		int h = new Double(bi.getHeight() * scaleFactor).intValue();
+
 		BufferedImage resized = new BufferedImage(w, h, bi.getType());
-	    Graphics2D g = resized.createGraphics();
-	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-	    g.drawImage(bi, 0, 0, w, h, 0, 0, bi.getWidth(), bi.getHeight(), null);
-	    g.dispose();
+		Graphics2D g = resized.createGraphics();
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g.drawImage(bi, 0, 0, w, h, 0, 0, bi.getWidth(), bi.getHeight(), null);
+		g.dispose();
 		return resized;
 	}
 
+	/**
+	 * Loads image from a file.
+	 * 
+	 * @param path
+	 *            images relative path.
+	 * @return Loaded image in BufferedImage.
+	 * @return If the path was incorrect, preset BufferedImage.
+	 */
 	public static BufferedImage loadImage(String path) {
 		BufferedImage image = null;
 		try {
@@ -53,7 +61,7 @@ public class ImageManipulation {
 		}
 		return image;
 	}
-	
+
 	public static BufferedImage setAlpha(BufferedImage bi, byte alpha) {
 		alpha %= 0xff;
 		for (int cx = 0; cx < bi.getWidth(); cx++) {
@@ -66,5 +74,15 @@ public class ImageManipulation {
 			}
 		}
 		return bi;
+	}
+
+	public static BufferedImage rotate90DX(BufferedImage bi) {
+		int width = bi.getWidth();
+		int height = bi.getHeight();
+		BufferedImage biFlip = new BufferedImage(height, width, bi.getType());
+		for (int i = 0; i < width; i++)
+			for (int j = 0; j < height; j++)
+				biFlip.setRGB(height - 1 - j, width - 1 - i, bi.getRGB(i, j));
+		return biFlip;
 	}
 }
