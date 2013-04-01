@@ -23,6 +23,18 @@ public class Map {
 		height = blocks[0].length;
 
 	}
+	private int[][] radius2 = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 }};
+	
+	public void updateBlocks() {
+		for (int i = 0; i < blocks.length; i++) {
+			for (int j = 0; j < blocks[i].length; j++) {
+				if (j + 1 < blocks[i].length && blocks[i][j + 1] == null) {
+					blocks[i][j + 1] = blocks[i][j];
+					blocks[i][j] = null;
+				}
+			}
+		}
+	}
 
 	public Block[][] getBlockArea(Point start) {
 		Block[][] area = new Block[tilesOnWidth][tilesOnHeight];
@@ -38,7 +50,7 @@ public class Map {
 		return area;
 	}
 
-	int[][] radius = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 }, { 1, 1 }, { 1, -1 }, { -1, 1 }, { -1, -1 }, { 0, 0 } };
+	private int[][] radius = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 }, { 1, 1 }, { 1, -1 }, { -1, 1 }, { -1, -1 }, { 0, 0 } };
 
 	public void removeBlock(Point p) {
 		if (inMap(p.x, p.y) && blocks[p.x][p.y] != null) {

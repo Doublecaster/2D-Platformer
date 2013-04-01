@@ -58,6 +58,7 @@ public class World {
 		if (InputHandler.getInstance().save.down) {
 			saveGame();
 		}
+		map.updateBlocks();
 	}
 
 	private void calculateRenderArea() {
