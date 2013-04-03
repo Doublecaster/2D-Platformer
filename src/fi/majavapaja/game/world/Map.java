@@ -23,18 +23,6 @@ public class Map {
 		height = blocks[0].length;
 
 	}
-	private int[][] radius2 = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 }};
-	
-	public void updateBlocks() {
-		for (int i = 0; i < blocks.length; i++) {
-			for (int j = 0; j < blocks[i].length; j++) {
-				if (j + 1 < blocks[i].length && blocks[i][j + 1] == null) {
-					blocks[i][j + 1] = blocks[i][j];
-					blocks[i][j] = null;
-				}
-			}
-		}
-	}
 
 	public Block[][] getBlockArea(Point start) {
 		Block[][] area = new Block[tilesOnWidth][tilesOnHeight];
@@ -49,8 +37,6 @@ public class Map {
 
 		return area;
 	}
-
-	private int[][] radius = { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 }, { 1, 1 }, { 1, -1 }, { -1, 1 }, { -1, -1 }, { 0, 0 } };
 
 	public void removeBlock(Point p) {
 		if (inMap(p.x, p.y) && blocks[p.x][p.y] != null) {
@@ -93,7 +79,7 @@ public class Map {
 		/*
 		 * for (int i = 0; i < blocks.length; i++) { for (int j = 0; j < blocks[i].length; j++) { if (blocks[j][i] != null && blocks[j][i].getID() == new SpawnPointTile().getID()) { if (inMap(j, i + 1)) { blocks[j][i + 1] = null; return new Point(j * Block.BLOCKWIDTH, i * Block.BLOCKHEIGHT); } } } }
 		 */
-		return new Point(0, 0 * Block.BLOCKHEIGHT);
+		return new Point(0, 470 * Block.BLOCKHEIGHT);
 	}
 
 	public Block[][] getBlocks() {
