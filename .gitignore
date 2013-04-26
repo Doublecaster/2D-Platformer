@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Directories #
 /build/
 /bin/
@@ -5,10 +6,15 @@ target/
 # OS Files #
 .DS_Store
 *.class
+=======
+*.class
+
+>>>>>>> b6fccbe22a82de3bf8e4c7257098b224e5103125
 # Package Files #
 *.jar
 *.war
 *.ear
+<<<<<<< HEAD
 *.db
 ######################
 # Windows
@@ -53,3 +59,5 @@ local.properties
 .cproject
 # PDT-specific
 .buildpath
+=======
+>>>>>>> b6fccbe22a82de3bf8e4c7257098b224e5103125
